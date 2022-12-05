@@ -1,0 +1,116 @@
+[
+    {
+        "id": 1,
+        "name": "Marinara",
+        "ingredients": [
+            "San Marzano tomato sauce",
+            "garlic",
+            "oregano",
+            "olive oil"
+        ],
+        "price": 3200,
+        "allergens": [
+            1,
+            7,
+            15
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Capricciosa",
+        "ingredients": [
+            "San Marzano tomato sauce",
+            "ham",
+            "mushrooms",
+            "artichokes",
+            "egg"
+        ],
+        "price": 3200,
+        "allergens": [
+            1,
+            7,
+            15
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Hawaiian",
+        "ingredients": [
+            "ham",
+            "bacon",
+            "pineapple"
+        ],
+        "price": 3000,
+        "allergens": [
+            1,
+            7,
+            15
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Margherita",
+        "ingredients": [
+            "tomato",
+            "mozarella",
+            "basil"
+        ],
+        "price": 2800,
+        "allergens": [
+            1,
+            7,
+            15
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Marinara",
+        "ingredients": [
+            "San Marzano tomato sauce",
+            "garlic",
+            "oregano",
+            "olive oil",
+            "no cheese"
+        ],
+        "price": 2600,
+        "allergens": [
+            1,
+            15
+            
+        ]
+    },
+    {
+        "id": 6,
+        "name": "Quattro formaggi",
+        "ingredients": [
+            "mozzarella",
+            "gorgonzola",
+            "parmezan",
+            "Parmigiano Reggiano"
+        ],
+        "price": 3200,
+        "allergens": [
+            1,
+            7,
+            15
+        ]
+    },
+    {
+        "id": 7,
+        "name": "Seafood",
+        "ingredients": [
+            "fish",
+            "shellfish",
+            "squid"
+        ],
+        "price": 3900,
+        "allergens": [
+            1,
+            2,
+            7,
+            14,
+            15
+        ]
+    }
+
+]
