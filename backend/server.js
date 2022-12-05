@@ -1,9 +1,7 @@
 const express = require("express");
 const path = require("path");
-const fs = require("fs/promises");
+const fs = require("fs");
 const app = express();
-
-const allergensList = path.join(`${__dirname}/allergens.json`);
 
 const port = 9001;
 
@@ -12,13 +10,27 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api/pizza", (req, res) => {
-
+    fs.readFile(path.join(`${__dirname}/pizza.json`), (err, data) =>{
+        if (err) {
+            console.log(err);
+            res.status(500).send("Error")
+        } else {
+            console.log("DONE");
+            res.send(JSON.parse(data))
+        }
+    })
 })
 
-app.get("/api/allergens", async (req, res) => {
-    const list = await fs.readFile(allergensList)
-
-    res.send(JSON.parse(list))
+app.get("/api/allergens", (req, res) => {
+    fs.readFile(path.join(`${__dirname}/allergens.json`), (err, data) =>{
+        if (err) {
+            console.log(err);
+            res.status(500).send("Error")
+        } else {
+            console.log("DONE");
+            res.send(JSON.parse(data))
+        }
+    })
 })
 
 app.get("/pizza/list", (req, res) => {
