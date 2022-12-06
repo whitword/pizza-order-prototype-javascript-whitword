@@ -5,6 +5,8 @@ const app = express();
 
 const port = 9001;
 
+app.use(express.static('frontend')); //static files
+
 app.get("/", (req, res) => {
     res.sendFile(path.join(`${__dirname}/../frontend/index.html`));
 });
