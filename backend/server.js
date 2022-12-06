@@ -5,7 +5,7 @@ const app = express();
 
 const port = 9001;
 
-app.use(express.static('frontend')); //static files
+app.use(express.static('frontend'));    //static files
 
 app.get("/", (req, res) => {
     res.sendFile(path.join(`${__dirname}/../frontend/index.html`));
@@ -23,6 +23,18 @@ app.get("/api/pizza", (req, res) => {
     })
 })
 
+app.get("/api/order", (req, res) => {
+    fs.readFile(path.join(`${__dirname}/order.json`), (err, data) =>{
+        if (err) {
+            console.log(err);
+            res.status(500).send("Error")
+        } else {
+            console.log("DONE");
+            res.send(JSON.parse(data).orders)
+        }
+    })
+})
+
 app.get("/api/allergens", (req, res) => {
     fs.readFile(path.join(`${__dirname}/allergens.json`), (err, data) =>{
         if (err) {
@@ -36,8 +48,8 @@ app.get("/api/allergens", (req, res) => {
 })
 
 app.get("/pizza/list", (req, res) => {
-
-})
+    res.sendFile(path.join(`${__dirname}/../frontend/index.html`));
+});
 
 
 
