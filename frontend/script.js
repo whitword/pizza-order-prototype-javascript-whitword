@@ -32,37 +32,47 @@ if (document.URL == 'http://127.0.0.1:9001/pizza/list') {
 
         for (const [key, value] of Object.entries(pizzaID)) {
           console.log(value);
+          if(key === "img"){
+            const img = document.createElement("img")
+            pizzaDiv.appendChild(img)
+            img.setAttribute("src", `${value}`)
+            img.setAttribute("width", "200")
+            img.setAttribute("id", `${key}`)
+          }else {
           const div = document.createElement("div")
           pizzaDiv.appendChild(div)
 
           div.setAttribute("id", `${key}`)
 
           div.innerHTML = `${key}: ${value}`
-        }
+        }}
 
         pizzaDiv.insertAdjacentHTML("afterbegin", buttonComponent(`orderBtn${pizzaID.id}`, "Add to cart"));
+        document.getElementById(`orderBtn${pizzaID.id}`).disabled = true;
         document.getElementById(`orderBtn${pizzaID.id}`).addEventListener('click', function () {
           document.getElementById('orderForm').style.display = "block"
         })
         pizzaDiv.insertAdjacentHTML("afterbegin", inputComponent(`${pizzaID.id}`, "Order amount"));
         document.getElementById(`${pizzaID.id}`).addEventListener('input', function (e) {
           const pizzaToOrder = transferObj.pizzas.find(i => i.id == e.target.id)
-          if(e.target.value>0){
-          if (pizzaToOrder) {
-            pizzaToOrder.amount = +e.target.value
-            console.log(transferObj.pizzas);
-          } else {
-            transferObj.pizzas.push({ id: +e.target.id, amount: e.target.value })
-            console.log(transferObj.pizzas);
-          }}else if (e.target.value == 0 && pizzaToOrder){
-           let pizzaToDelete = transferObj.pizzas.findIndex(i => i.id == e.target.id)
-              console.log(pizzaToDelete); 
-              transferObj.pizzas.splice(pizzaToDelete, 1);
+          if (e.target.value > 0) {
+            document.getElementById(`orderBtn${pizzaID.id}`).disabled = false;
+            if (pizzaToOrder) {
+              pizzaToOrder.amount = +e.target.value
               console.log(transferObj.pizzas);
+            } else {
+              transferObj.pizzas.push({ id: +e.target.id, amount: e.target.value })
+              console.log(transferObj.pizzas);
+            }
+          } else if (e.target.value == 0 && pizzaToOrder) {
+            let pizzaToDelete = transferObj.pizzas.findIndex(i => i.id == e.target.id)
+            console.log(pizzaToDelete);
+            transferObj.pizzas.splice(pizzaToDelete, 1);
+            console.log(transferObj.pizzas);
           }
-          if(transferObj.pizzas.length<1){
+          if (transferObj.pizzas.length < 1) {
             document.getElementById('orderForm').style.display = "none";
-
+            document.getElementById(`orderBtn${pizzaID.id}`).disabled = true;
           }
         });
       })
@@ -75,7 +85,7 @@ if (document.URL == 'http://127.0.0.1:9001/pizza/list') {
 let orderSchema = {
   id: 0,
   pizzas: [
-    
+
   ],
   date: {
     year: 0000,
