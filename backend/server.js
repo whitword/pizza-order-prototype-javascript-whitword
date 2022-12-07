@@ -47,6 +47,9 @@ app.get("/api/allergens", (req, res) => {
         }
     })
 })
+app.get("/pizza/allergens", (req, res) => {
+            res.sendFile(path.join(`${__dirname}/../frontend/index.html`));
+    })
 
 app.get("/pizza/list", (req, res) => {
     res.sendFile(path.join(`${__dirname}/../frontend/index.html`));

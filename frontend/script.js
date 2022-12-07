@@ -12,6 +12,7 @@ const inputComponent = (id, plch) => `<input id="${id}" placeholder = "${plch}">
 
 function loadHeader() {
   header.insertAdjacentHTML("beforeend", createLink("http://127.0.0.1:9001/pizza/list", "Our Pizzas \n"));
+  header.insertAdjacentHTML("beforeend", createLink("http://127.0.0.1:9001/pizza/allergens", "Allergens \n"));
   header.insertAdjacentHTML("beforeend", createLink("http://127.0.0.1:9001/", "NONNA PIZZA \n"));
   //header.insertAdjacentHTML("beforeend", createLink("http://127.0.0.1:9001/order", "Your Cart \n"));
 }
@@ -30,6 +31,11 @@ if (document.URL == 'http://127.0.0.1:9001/') {
 if (document.URL == 'http://127.0.0.1:9001/pizza/list') {
   loadHeader();
   loadPizzaList()
+}
+
+if (document.URL == 'http://127.0.0.1:9001/pizza/allergens') {
+  loadHeader();
+  loadAllergens();
 }
 
 let orderSchema = {
@@ -106,6 +112,27 @@ function loadOrderPage() {
   });
 
 }
+function loadAllergens(){
+  fetch('/../api/allergens')
+  .then((response) => {
+    response.json()
+    .then((data) => {
+      console.log(data);
+      data.allergens.map(i => {
+        const allergen = document.createElement("div")
+        rootElement.appendChild(allergen)
+        allergen.setAttribute("id", "allergenContainer")
+
+        for (const [key, value] of Object.entries(i)) {
+            const div = document.createElement("div")
+            div.setAttribute("id", "allergens")
+            div.innerHTML = `${key}: ${value}`
+            allergen.appendChild(div)
+          }
+      })
+})
+})
+};
 
 function loadPizzaList() {
   fetch('/../api/pizza').then((response) => {
