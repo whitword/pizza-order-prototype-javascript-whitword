@@ -22,6 +22,33 @@
           "street": "Via Appia 6"
         }
       }
+    },
+    {
+      "id": 2,
+      "pizzas": [
+        {
+          "id": 1,
+          "amount": "47"
+        },
+        {
+          "id": 2,
+          "amount": "25"
+        }
+      ],
+      "date": {
+        "year": "2022",
+        "month": "12",
+        "day": "07",
+        "time": "15:45:"
+      },
+      "customer": {
+        "name": "LB",
+        "email": "",
+        "address": {
+          "city": "",
+          "street": ""
+        }
+      }
     }
   ]
 }

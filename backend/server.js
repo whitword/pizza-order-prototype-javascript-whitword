@@ -52,6 +52,10 @@ app.get("/pizza/list", (req, res) => {
     res.sendFile(path.join(`${__dirname}/../frontend/index.html`));
 });
 
+/*app.get("/order", (req, res) => {
+    res.sendFile(path.join(`${__dirname}/../frontend/index.html`));
+});*/
+
 app.post("/api/order", (req, res) => {
     if (!req.body) { res.status(400).send("Error"); }
     else {
