@@ -32,13 +32,20 @@ if (document.URL == 'http://127.0.0.1:9001/pizza/list') {
 
         for (const [key, value] of Object.entries(pizzaID)) {
           console.log(value);
+          if(key === "img"){
+            const img = document.createElement("img")
+            pizzaDiv.appendChild(img)
+            img.setAttribute("src", `${value}`)
+            img.setAttribute("width", "200")
+            img.setAttribute("id", `${key}`)
+          }else {
           const div = document.createElement("div")
           pizzaDiv.appendChild(div)
 
           div.setAttribute("id", `${key}`)
 
           div.innerHTML = `${key}: ${value}`
-        }
+        }}
 
         pizzaDiv.insertAdjacentHTML("afterbegin", buttonComponent(`orderBtn${pizzaID.id}`, "Add to cart"));
         document.getElementById(`orderBtn${pizzaID.id}`).disabled = true;
