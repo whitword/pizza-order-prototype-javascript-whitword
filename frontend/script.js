@@ -1,29 +1,30 @@
 const rootElement = document.createElement("div");
 rootElement.setAttribute("id", "root");
 document.body.appendChild(rootElement);
-const siteTitle = document.createElement('h1');
-siteTitle.innerText = "Welcome to Nonna Pizza";
-document.body.insertAdjacentElement("afterbegin", siteTitle);
 
 const buttonComponent = (id, text) => `<button id="${id}">${text}</button>`;
 const createLink = (url, text) => `<a class="btnLikeLink" href="${url}">${text}</a>`;
 const inputComponent = (id, plch) => `<input id="${id}" placeholder = "${plch}"></input>`;
 
-function loadSite() {
+function loadMain() {
   rootElement.insertAdjacentHTML("afterbegin", createLink("http://127.0.0.1:9001/pizza/list", "Our Pizzas"));
+  const siteTitle = document.createElement('h1');
+  siteTitle.innerText = "Welcome to Nonna Pizza";
+  document.body.insertAdjacentElement("afterbegin", siteTitle);
 }
 
 if (document.URL == 'http://127.0.0.1:9001/') {
-  loadSite();
+  loadMain();
 }
 
 if (document.URL == 'http://127.0.0.1:9001/pizza/list') {
-  console.log('pizza list');
+  loadPizzaList()
+}
 
+function loadPizzaList() {
   fetch('/../api/pizza').then((response) => {
     response.json().then((data) => {
       data.map(pizzaID => {
-        console.log(pizzaID);
 
         const pizzaDiv = document.createElement("div")
         rootElement.appendChild(pizzaDiv)
@@ -31,21 +32,21 @@ if (document.URL == 'http://127.0.0.1:9001/pizza/list') {
         pizzaDiv.setAttribute("id", `${pizzaID.name}`)
 
         for (const [key, value] of Object.entries(pizzaID)) {
-          console.log(value);
-          if(key === "img"){
+          if (key === "img") {
             const img = document.createElement("img")
             pizzaDiv.appendChild(img)
             img.setAttribute("src", `${value}`)
             img.setAttribute("width", "200")
             img.setAttribute("id", `${key}`)
-          }else {
-          const div = document.createElement("div")
-          pizzaDiv.appendChild(div)
+          } else {
+            const div = document.createElement("div")
+            pizzaDiv.appendChild(div)
 
-          div.setAttribute("id", `${key}`)
+            div.setAttribute("id", `${key}`)
 
-          div.innerHTML = `${key}: ${value}`
-        }}
+            div.innerHTML = `${key}: ${value}`
+          }
+        }
 
         pizzaDiv.insertAdjacentHTML("afterbegin", buttonComponent(`orderBtn${pizzaID.id}`, "Add to cart"));
         document.getElementById(`orderBtn${pizzaID.id}`).disabled = true;
@@ -59,16 +60,12 @@ if (document.URL == 'http://127.0.0.1:9001/pizza/list') {
             document.getElementById(`orderBtn${pizzaID.id}`).disabled = false;
             if (pizzaToOrder) {
               pizzaToOrder.amount = +e.target.value
-              console.log(transferObj.pizzas);
             } else {
               transferObj.pizzas.push({ id: +e.target.id, amount: e.target.value })
-              console.log(transferObj.pizzas);
             }
           } else if (e.target.value == 0 && pizzaToOrder) {
             let pizzaToDelete = transferObj.pizzas.findIndex(i => i.id == e.target.id)
-            console.log(pizzaToDelete);
             transferObj.pizzas.splice(pizzaToDelete, 1);
-            console.log(transferObj.pizzas);
           }
           if (transferObj.pizzas.length < 1) {
             document.getElementById('orderForm').style.display = "none";
@@ -78,7 +75,6 @@ if (document.URL == 'http://127.0.0.1:9001/pizza/list') {
       })
     });
   })
-    .catch(err => console.log(err));
 }
 
 
@@ -137,8 +133,6 @@ function orderGet() {
       transferObj.date.month = utc.slice(5, 7);
       transferObj.date.day = utc.slice(8, 10);
       transferObj.date.time = utc.slice(11, 17);
-      console.log(transferObj);
-      console.log(JSON.stringify(transferObj));
     })
     .then(x => orderPost())
 }
