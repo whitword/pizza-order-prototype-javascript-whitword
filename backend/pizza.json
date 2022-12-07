@@ -1,5 +1,6 @@
 [
     {
+        "img": "https://soulfoodie.de/wp-content/uploads/2021/01/50811171181_49fb9d7000_k.jpg",
         "id": 1,
         "name": "Napoletana",
         "ingredients": [
@@ -11,10 +12,10 @@
             1,
             7,
             15
-        ],
-        "img": "https://soulfoodie.de/wp-content/uploads/2021/01/50811171181_49fb9d7000_k.jpg"
+        ]
     },
     {
+        "img": "https://www.italienische-rezepte.net/wp-content/uploads/2020/11/pizza-capricciosa.jpg",
         "id": 2,
         "name": "Capricciosa",
         "ingredients": [
@@ -29,10 +30,10 @@
             1,
             7,
             15
-        ],
-        "img": "https://www.italienische-rezepte.net/wp-content/uploads/2020/11/pizza-capricciosa.jpg"
+        ]
     },
     {
+        "img": "https://www.foodandwine.com/thmb/FTXK9EUXIspg64p1JjcVie-azPk=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/hawaiian-in-nyc-pizza-FT-RECIPE0721-0557e8d54b8c4349b1686232ec8f7b66.jpg",
         "id": 3,
         "name": "Hawaiian",
         "ingredients": [
@@ -45,10 +46,10 @@
             1,
             7,
             15
-        ],
-        "img": "https://www.foodandwine.com/thmb/FTXK9EUXIspg64p1JjcVie-azPk=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/hawaiian-in-nyc-pizza-FT-RECIPE0721-0557e8d54b8c4349b1686232ec8f7b66.jpg"
+        ]
     },
     {
+        "img": "https://www.foodandwine.com/thmb/3kzG4PWOAgZIIfZwMBLKqoTkaGQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/margherita-pizza-with-argula-and-prosciutto-FT-RECIPE0721-04368ec288a84d2e997573aca0001d98.jpg",
         "id": 4,
         "name": "Margherita",
         "ingredients": [
@@ -61,10 +62,10 @@
             1,
             7,
             15
-        ],
-        "img": "https://www.foodandwine.com/thmb/3kzG4PWOAgZIIfZwMBLKqoTkaGQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/margherita-pizza-with-argula-and-prosciutto-FT-RECIPE0721-04368ec288a84d2e997573aca0001d98.jpg"
+        ]
     },
     {
+        "img": "https://img.delicious.com.au/qRrzAHSr/del/2019/03/marinara-pizza-102752-2.jpg",
         "id": 5,
         "name": "Marinara",
         "ingredients": [
@@ -78,12 +79,12 @@
         "allergens": [
             1,
             15
-        ],
-        "img": "https://img.delicious.com.au/qRrzAHSr/del/2019/03/marinara-pizza-102752-2.jpg"
+        ]
     },
     {
+        "img": "https://bellozzo.hu/files/pix-kinalat-etel/desktop915x650pxquattroformaggi-pizza.jpg",
         "id": 6,
-        "name": "Quattro formaggi",
+        "name": "Quattroformaggi",
         "ingredients": [
             "mozzarella",
             "gorgonzola",
@@ -95,10 +96,10 @@
             1,
             7,
             15
-        ],
-        "img": "https://bellozzo.hu/files/pix-kinalat-etel/desktop915x650pxquattroformaggi-pizza.jpg"
+        ]
     },
     {
+        "img": "https://besthqwallpapers.com/Uploads/8-3-2020/124045/thumb2-seafood-pizza-pizza-with-mussels-fast-food-pizza-types-of-pizzas.jpg",
         "id": 7,
         "name": "Seafood",
         "ingredients": [
@@ -113,7 +114,6 @@
             7,
             14,
             15
-        ],
-        "img": "https://besthqwallpapers.com/Uploads/8-3-2020/124045/thumb2-seafood-pizza-pizza-with-mussels-fast-food-pizza-types-of-pizzas.jpg"
+        ]
     }
 ]

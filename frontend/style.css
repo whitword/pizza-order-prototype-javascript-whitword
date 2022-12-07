@@ -1,0 +1,49 @@
+body{
+    font-family: 'Overpass';
+    display: flex;
+    flex-direction:column;
+    flex-wrap: wrap;
+    background-image:url("https://www.franciscosegarra.com/wp-content/uploads/2021/11/italian-restaurant-decor-interior.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+h1{
+    position:relative;
+    left: 28%; 
+    width: 400px;
+    align-items: center;
+    color:brown;
+    font-weight: 500;
+    background: rgba(216, 195, 141, 0.8);
+    padding-left: 60px;
+    line-height: 140.62%    
+}
+#img{
+    position: relative;
+    left: 150px;
+    top: 10px;
+    width: 250px;
+    border-radius: 10px
+}
+
+#id{
+    display: none
+}
+
+#Napoletana, #Capricciosa, #Hawaiian, #Margherita, #Marinara, #Quattroformaggi, #Seafood{
+    position: relative;
+    left: 150px;
+    width: 600px;
+    flex-direction:column;
+    align-items: flex-start;
+    line-height: 140.62%;
+    letter-spacing: 0.1em;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    margin: 2rem;
+    padding-left: 15px;
+    background: rgba(216, 195, 141, 0.6);
+    box-shadow: 0 27px 55px 0 rgba(0, 0, 0, 0.3), 0 17px 17px 0 rgba(0, 0, 0, 0.15);
+}
