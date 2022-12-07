@@ -1,14 +1,12 @@
 [
     {
         "id": 1,
-        "name": "Marinara",
+        "name": "Napoletana",
         "ingredients": [
-            "San Marzano tomato sauce",
-            "garlic",
-            "oregano",
-            "olive oil"
+            "Pomodorino Vesuviano tomato sauce",
+            "Mozzarella di Bufala Campana"
         ],
-        "price": 3200,
+        "price": 2600,
         "allergens": [
             1,
             7,
@@ -52,7 +50,7 @@
         "name": "Margherita",
         "ingredients": [
             "tomato",
-            "mozarella",
+            "mozzarella",
             "basil"
         ],
         "price": 2800,
