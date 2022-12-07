@@ -47,13 +47,24 @@ if (document.URL == 'http://127.0.0.1:9001/pizza/list') {
         pizzaDiv.insertAdjacentHTML("afterbegin", inputComponent(`${pizzaID.id}`, "Order amount"));
         document.getElementById(`${pizzaID.id}`).addEventListener('input', function (e) {
           const pizzaToOrder = transferObj.pizzas.find(i => i.id == e.target.id)
+          if(e.target.value>0){
           if (pizzaToOrder) {
             pizzaToOrder.amount = +e.target.value
+            console.log(transferObj.pizzas);
           } else {
             transferObj.pizzas.push({ id: +e.target.id, amount: e.target.value })
+            console.log(transferObj.pizzas);
+          }}else if (e.target.value == 0 && pizzaToOrder){
+           let pizzaToDelete = transferObj.pizzas.findIndex(i => i.id == e.target.id)
+              console.log(pizzaToDelete); 
+              transferObj.pizzas.splice(pizzaToDelete, 1);
+              console.log(transferObj.pizzas);
+          }
+          if(transferObj.pizzas.length<1){
+            document.getElementById('orderForm').style.display = "none";
+
           }
         });
-        console.log(transferObj);
       })
     });
   })
@@ -64,10 +75,7 @@ if (document.URL == 'http://127.0.0.1:9001/pizza/list') {
 let orderSchema = {
   id: 0,
   pizzas: [
-    {
-      id: 0,
-      amount: 0
-    }
+    
   ],
   date: {
     year: 0000,
