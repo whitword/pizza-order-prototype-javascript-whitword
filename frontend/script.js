@@ -204,7 +204,7 @@ function loadPizzaList() {
             const div = document.createElement("div")
             pizzaDiv.appendChild(div)
             div.setAttribute("id", `${key}`)
-
+            div.innerHTML += `allergens: `
             fetch('/../api/allergens')
             .then((response) => {
               response.json()
