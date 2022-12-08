@@ -83,7 +83,7 @@ const responseMessage = () => `
     <div id="responseMessage">  
     <h2>Your order has been registered</h2>
     <text>Estimated delivery time is 40 minutes.
-    Nonna hopes you will be staisfied, and order again soon.
+    Nonna hopes you will be satisfied, and order again soon.
     We wish you a Merry Christmas and Happy New Year!</text>
     </div>`
   ;
@@ -172,7 +172,6 @@ function loadAllergens() {
             rootElement.appendChild(allergen)
             allergen.setAttribute("id", "allergenContainer")
             allergenFinder = data.allergens;
-            console.log(allergenFinder);
             for (const [key, value] of Object.entries(i)) {
               const div = document.createElement("div")
               div.setAttribute("id", "allergensData")
@@ -200,21 +199,21 @@ function loadPizzaList() {
             pizzaDiv.appendChild(img)
             img.setAttribute("id", `${key}`)
             img.setAttribute("src", `${value}`)
-          } else if(key === "allergens"){
+          } else if (key === "allergens") {
             const div = document.createElement("div")
             pizzaDiv.appendChild(div)
             div.setAttribute("id", `${key}`)
             div.innerHTML += `allergens: `
             fetch('/../api/allergens')
-            .then((response) => {
-              response.json()
-                .then((data) => {
-                allergenFinder = data;
-                let allergenNeeded = value.map(i=>allergenFinder.allergens.find(j => j.id == i));
-                div.innerHTML += `${allergenNeeded.map(i=>i.name)}`
+              .then((response) => {
+                response.json()
+                  .then((data) => {
+                    allergenFinder = data;
+                    let allergenNeeded = value.map(i => allergenFinder.allergens.find(j => j.id == i));
+                    div.innerHTML += `${allergenNeeded.map(i => i.name)}`
+                  })
               })
-                })          
-          }else {
+          } else {
             const div = document.createElement("div")
             pizzaDiv.appendChild(div)
 
