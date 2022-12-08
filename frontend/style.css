@@ -25,7 +25,7 @@ h1 {
     border-radius: 5px
 }
 
-h2{
+h2 {
     font-weight: 300;
     padding-left: 5%;
 }
@@ -53,7 +53,7 @@ h2{
 }
 
 #img {
-    margin:auto;
+    margin: auto;
     position: relative;
     left: 25%;
     top: 10px;
@@ -82,7 +82,7 @@ h2{
     letter-spacing: 0.1em;
     border: 1px solid #000000;
     border-radius: 5px;
-    margin-block : 2rem;
+    margin-block: 2rem;
     padding-left: 15px;
     background: rgba(216, 195, 141, 0.6);
     box-shadow: 0 27px 55px 0 rgba(0, 0, 0, 0.3), 0 17px 17px 0 rgba(0, 0, 0, 0.15);
@@ -104,20 +104,23 @@ h2{
     line-height: 140.62%;
 
 }
-button{
+
+button {
     margin: 1rem;
     width: auto;
     box-shadow: 0 27px 55px 0 rgba(0, 0, 0, 0.3), 0 17px 17px 0 rgba(0, 0, 0, 0.15);
     border-radius: 20%;
 }
-input{
+
+input {
     margin: 1rem;
     width: auto;
     box-shadow: 0 27px 55px 0 rgba(0, 0, 0, 0.3), 0 17px 17px 0 rgba(0, 0, 0, 0.15);
     /* border-radius: 20%; */
 }
-#orderForm{
-    position:fixed;
+
+#orderForm {
+    position: fixed;
     left: 78%;
     top: 1%;
     width: 20%;
@@ -125,4 +128,8 @@ input{
     box-shadow: 0 27px 55px 0 rgba(0, 0, 0, 0.3), 0 17px 17px 0 rgba(0, 0, 0, 0.15);
     border: 1px solid #000000;
     border-radius: 5px
+}
+
+#yourOrder {
+    padding-left: 20px;
 }
