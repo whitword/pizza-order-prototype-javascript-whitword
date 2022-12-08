@@ -65,23 +65,102 @@ const formComponent = () => `
     <form id="orderForm" style="display:none">     
       <h2>Your personal data</h2>
       <input type=text id="nameInput" placeholder="Your name"></input>
+      <small id="nameMessage"></small>
       <input type=text id="email" placeholder="your email"></input>
+      <small id="emailMessage"></small>
           <h2>Your Address</h2>
       <input type=text id="city" placeholder="City"></input>
+      <small id="cityMessage"></small>
       <input type=text id="street" placeholder="Street"></input>
+      <small id="streetMessage"></small>
       <h2>Your order</h2>
       <div id="yourOrder"></div>
       <button id="submit">Submit</button>
+      <small id="submitMessage" style= "color: red"></small>
     </form>
   `;
+const responseMessage = () => `
+    <div id="responseMessage">  
+    <h2>Your order has been registered</h2>
+    <text>Estimated delivery time is 40 minutes.
+    Nonna hopes you will be staisfied, and order again soon.
+    We wish you a Merry Christmas and Happy New Year!</text>
+    </div>`
+  ;
+
+
 rootElement.insertAdjacentHTML("afterbegin", formComponent());
-document.getElementById('nameInput').addEventListener('input', (e) => transferObj.customer.name = e.target.value)
-document.getElementById('email').addEventListener('input', (e) => transferObj.customer.email = e.target.value)
-document.getElementById('city').addEventListener('input', (e) => transferObj.customer.address.city = e.target.value)
-document.getElementById('street').addEventListener('input', (e) => transferObj.customer.address.street = e.target.value)
+
+let checkName = "false";
+let checkEmail = "false";
+let checkCity = "false";
+let checkStreet = "false";
+let checker = "false";
+function checkRefresh() { if (checkName == "true" && checkEmail == "true" && checkCity == "true" && checkStreet == "true") { checker = "true" } }
+
+document.getElementById('nameInput').addEventListener('input', function (e) {
+  let errMsg = document.getElementById('nameMessage');
+  if (e.target.value === "") {
+    errMsg.innerText = "Invalid name";
+    errMsg.style.color = "red";
+  } else {
+    checkName = "true";
+    errMsg.innerText = "Ok";
+    errMsg.style.color = "green";
+    transferObj.customer.name = e.target.value
+  }
+})
+document.getElementById('email').addEventListener('input', function (e) {
+  let errMsg = document.getElementById('emailMessage');
+  if (!e.target.value.includes("@") || !e.target.value.includes(".")) {
+    errMsg.innerText = "Invalid email";
+    errMsg.style.color = "red";
+    document.getElementById('email').style.color = "red";
+  } else {
+    checkEmail = "true";
+    errMsg.innerText = "Ok";
+    errMsg.style.color = "green";
+    document.getElementById('email').style.color = "green";
+    transferObj.customer.email = e.target.value;
+  }
+})
+document.getElementById('city').addEventListener('input', function (e) {
+  let errMsg = document.getElementById('cityMessage');
+  if (e.target.value === "") {
+    errMsg.innerText = "Invalid city";
+    errMsg.style.color = "red";
+  } else {
+    checkCity = "true";
+    errMsg.innerText = "Ok";
+    errMsg.style.color = "green";
+    transferObj.customer.address.city = e.target.value
+  }
+});
+
+
+document.getElementById('street').addEventListener('input', function (e) {
+  let errMsg = document.getElementById('streetMessage');
+  if (e.target.value === "") {
+    errMsg.innerText = "Invalid street";
+    errMsg.style.color = "red";
+  } else {
+    checkStreet = "true";
+    errMsg.innerText = "Ok";
+    errMsg.style.color = "green";
+    transferObj.customer.address.street = e.target.value
+  }
+});
+
 document.getElementById('submit').addEventListener('click', function (event) {
   event.preventDefault();
-  orderGet();
+  checkRefresh();
+  if (checker == "false") {
+    document.getElementById('submitMessage').innerText = "Empty details!!"
+  } else {
+    orderGet();
+    rootElement.innerHTML = "";
+    rootElement.insertAdjacentHTML("beforeend", responseMessage());
+  }
 });
 
 function loadAllergens() {
@@ -96,7 +175,7 @@ function loadAllergens() {
 
             for (const [key, value] of Object.entries(i)) {
               const div = document.createElement("div")
-              div.setAttribute("id", "allergens")
+              div.setAttribute("id", "allergensData")
               div.innerHTML = `${key}: ${value}`
               allergen.appendChild(div)
             }
@@ -140,7 +219,7 @@ function loadPizzaList() {
           if (e.target.value > 0) {
             document.getElementById(`orderBtn${pizzaID.id}`).disabled = false;
           }
-          
+
         });
 
         document.getElementById(`orderBtn${pizzaID.id}`).addEventListener('click', function () {
@@ -175,7 +254,7 @@ function loadPizzaList() {
           checkIfDelete()
           function checkIfDelete() {
             const pizzaToOrder = transferObj.pizzas.find(i => i.id == pizzaID.id)
-            
+
             if ((inputField.value == 0 || pizzaToOrder.amount == 0) && pizzaToOrder) {
               let pizzaToDelete = transferObj.pizzas.findIndex(i => i.id == inputField.id)
               transferObj.pizzas.splice(pizzaToDelete, 1);
@@ -212,10 +291,10 @@ function loadPizzaList() {
               addButtons()
               checkIfDelete()
             })
-  
+
             plusButton.addEventListener("click", function (event) {
               event.preventDefault();
-  
+
               pizzaToOrder.amount++
               yourPizza.innerText = `${pizzaID.name}: ${pizzaToOrder.amount}`
               inputField.value = pizzaToOrder.amount

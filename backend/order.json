@@ -1,39 +1,5 @@
 {
   "orders": [
-    {
-      "id": 1,
-      "pizzas": [
-        {
-          "id": 1,
-          "amount": 3
-        },
-        {
-          "id": 7,
-          "amount": "21"
-        },
-        {
-          "id": 6,
-          "amount": "234"
-        },
-        {
-          "id": 4,
-          "amount": "235432"
-        }
-      ],
-      "date": {
-        "year": "2022",
-        "month": "12",
-        "day": "08",
-        "time": "12:09"
-      },
-      "customer": {
-        "name": "test",
-        "email": "test@test.com",
-        "address": {
-          "city": "test city",
-          "street": "1"
-        }
-      }
-    }
+    
   ]
 }
