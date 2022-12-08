@@ -162,7 +162,6 @@ document.getElementById('submit').addEventListener('click', function (event) {
     rootElement.insertAdjacentHTML("beforeend", responseMessage());
   }
 });
-
 function loadAllergens() {
   fetch('/../api/allergens')
     .then((response) => {
@@ -172,7 +171,8 @@ function loadAllergens() {
             const allergen = document.createElement("div")
             rootElement.appendChild(allergen)
             allergen.setAttribute("id", "allergenContainer")
-
+            allergenFinder = data.allergens;
+            console.log(allergenFinder);
             for (const [key, value] of Object.entries(i)) {
               const div = document.createElement("div")
               div.setAttribute("id", "allergensData")
@@ -200,7 +200,21 @@ function loadPizzaList() {
             pizzaDiv.appendChild(img)
             img.setAttribute("id", `${key}`)
             img.setAttribute("src", `${value}`)
-          } else {
+          } else if(key === "allergens"){
+            const div = document.createElement("div")
+            pizzaDiv.appendChild(div)
+            div.setAttribute("id", `${key}`)
+
+            fetch('/../api/allergens')
+            .then((response) => {
+              response.json()
+                .then((data) => {
+                allergenFinder = data;
+                let allergenNeeded = value.map(i=>allergenFinder.allergens.find(j => j.id == i));
+                div.innerHTML += `${allergenNeeded.map(i=>i.name)}`
+              })
+                })          
+          }else {
             const div = document.createElement("div")
             pizzaDiv.appendChild(div)
 
