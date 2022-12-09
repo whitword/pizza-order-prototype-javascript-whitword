@@ -30,7 +30,8 @@ if (document.URL == 'http://127.0.0.1:9001/') {
 
 if (document.URL == 'http://127.0.0.1:9001/pizza/list') {
   loadHeader();
-  loadPizzaList()
+  loadPizzaList();
+  loadOrderForm()
 }
 
 if (document.URL == 'http://127.0.0.1:9001/pizza/allergens') {
@@ -59,9 +60,12 @@ let orderSchema = {
   }
 }
 
+
 let transferObj = JSON.parse(JSON.stringify(orderSchema));
 
-const formComponent = () => `
+
+function loadOrderForm() {
+  const formComponent = () => `
     <form id="orderForm" style="display:none">     
       <h2>Your personal data</h2>
       <input type=text id="nameInput" placeholder="Your name"></input>
@@ -79,87 +83,88 @@ const formComponent = () => `
       <small id="submitMessage" style= "color: red"></small>
     </form>
   `;
-const responseMessage = () => `
+  const responseMessage = () => `
     <div id="responseMessage">  
     <h2>Your order has been registered</h2>
     <text>Estimated delivery time is 40 minutes.
     Nonna hopes you will be satisfied, and order again soon.
     We wish you a Merry Christmas and Happy New Year!</text>
     </div>`
-  ;
+    ;
 
-rootElement.insertAdjacentHTML("afterbegin", formComponent());
+  rootElement.insertAdjacentHTML("afterbegin", formComponent());
 
-let checkName = "false";
-let checkEmail = "false";
-let checkCity = "false";
-let checkStreet = "false";
-let checker = "false";
-function checkRefresh() { if (checkName == "true" && checkEmail == "true" && checkCity == "true" && checkStreet == "true") { checker = "true" } }
+  let checkName = "false";
+  let checkEmail = "false";
+  let checkCity = "false";
+  let checkStreet = "false";
+  let checker = "false";
+  function checkRefresh() { if (checkName == "true" && checkEmail == "true" && checkCity == "true" && checkStreet == "true") { checker = "true" } }
 
-document.getElementById('nameInput').addEventListener('input', function (e) {
-  let errMsg = document.getElementById('nameMessage');
-  if (e.target.value === "") {
-    errMsg.innerText = "Invalid name";
-    errMsg.style.color = "red";
-  } else {
-    checkName = "true";
-    errMsg.innerText = "Ok";
-    errMsg.style.color = "green";
-    transferObj.customer.name = e.target.value
-  }
-})
-document.getElementById('email').addEventListener('input', function (e) {
-  let errMsg = document.getElementById('emailMessage');
-  if (!e.target.value.includes("@") || !e.target.value.includes(".")) {
-    errMsg.innerText = "Invalid email";
-    errMsg.style.color = "red";
-    document.getElementById('email').style.color = "red";
-  } else {
-    checkEmail = "true";
-    errMsg.innerText = "Ok";
-    errMsg.style.color = "green";
-    document.getElementById('email').style.color = "green";
-    transferObj.customer.email = e.target.value;
-  }
-})
-document.getElementById('city').addEventListener('input', function (e) {
-  let errMsg = document.getElementById('cityMessage');
-  if (e.target.value === "") {
-    errMsg.innerText = "Invalid city";
-    errMsg.style.color = "red";
-  } else {
-    checkCity = "true";
-    errMsg.innerText = "Ok";
-    errMsg.style.color = "green";
-    transferObj.customer.address.city = e.target.value
-  }
-});
+  document.getElementById('nameInput').addEventListener('input', function (e) {
+    let errMsg = document.getElementById('nameMessage');
+    if (e.target.value === "") {
+      errMsg.innerText = "Invalid name";
+      errMsg.style.color = "red";
+    } else {
+      checkName = "true";
+      errMsg.innerText = "Ok";
+      errMsg.style.color = "green";
+      transferObj.customer.name = e.target.value
+    }
+  })
+  document.getElementById('email').addEventListener('input', function (e) {
+    let errMsg = document.getElementById('emailMessage');
+    if (!e.target.value.includes("@") || !e.target.value.includes(".")) {
+      errMsg.innerText = "Invalid email";
+      errMsg.style.color = "red";
+      document.getElementById('email').style.color = "red";
+    } else {
+      checkEmail = "true";
+      errMsg.innerText = "Ok";
+      errMsg.style.color = "green";
+      document.getElementById('email').style.color = "green";
+      transferObj.customer.email = e.target.value;
+    }
+  })
+  document.getElementById('city').addEventListener('input', function (e) {
+    let errMsg = document.getElementById('cityMessage');
+    if (e.target.value === "") {
+      errMsg.innerText = "Invalid city";
+      errMsg.style.color = "red";
+    } else {
+      checkCity = "true";
+      errMsg.innerText = "Ok";
+      errMsg.style.color = "green";
+      transferObj.customer.address.city = e.target.value
+    }
+  });
 
-document.getElementById('street').addEventListener('input', function (e) {
-  let errMsg = document.getElementById('streetMessage');
-  if (e.target.value === "") {
-    errMsg.innerText = "Invalid street";
-    errMsg.style.color = "red";
-  } else {
-    checkStreet = "true";
-    errMsg.innerText = "Ok";
-    errMsg.style.color = "green";
-    transferObj.customer.address.street = e.target.value
-  }
-});
+  document.getElementById('street').addEventListener('input', function (e) {
+    let errMsg = document.getElementById('streetMessage');
+    if (e.target.value === "") {
+      errMsg.innerText = "Invalid street";
+      errMsg.style.color = "red";
+    } else {
+      checkStreet = "true";
+      errMsg.innerText = "Ok";
+      errMsg.style.color = "green";
+      transferObj.customer.address.street = e.target.value
+    }
+  });
 
-document.getElementById('submit').addEventListener('click', function (event) {
-  event.preventDefault();
-  checkRefresh();
-  if (checker == "false") {
-    document.getElementById('submitMessage').innerText = "Empty details!!"
-  } else {
-    orderGet();
-    rootElement.innerHTML = "";
-    rootElement.insertAdjacentHTML("beforeend", responseMessage());
-  }
-});
+  document.getElementById('submit').addEventListener('click', function (event) {
+    event.preventDefault();
+    checkRefresh();
+    if (checker == "false") {
+      document.getElementById('submitMessage').innerText = "Empty details!!"
+    } else {
+      orderGet();
+      rootElement.innerHTML = "";
+      rootElement.insertAdjacentHTML("beforeend", responseMessage());
+    }
+  });
+}
 
 function loadAllergens() {
   fetch('/../api/allergens')
@@ -183,9 +188,11 @@ function loadAllergens() {
 let allergenToFilter = 0;
 
 function loadPizzaList() {
+  const container = document.createElement("div");
+  rootElement.appendChild(container);
   const allergenFilterer = document.createElement("select")
   allergenFilterer.setAttribute("id", "allergenFilterer");
-  rootElement.appendChild(allergenFilterer);
+  container.appendChild(allergenFilterer);
   let opt = document.createElement("option");
   opt.innerHTML = "Select an allergen to filter";
   allergenFilterer.appendChild(opt);
@@ -201,8 +208,8 @@ function loadPizzaList() {
           }
           allergenFilterer.addEventListener('change', (e) => {
             allergenToFilter = e.target.value;
-            rootElement.innerHTML = "";
-            loadPizzaList()
+            container.innerHTML = "";
+            loadPizzaList();
           }
           )
         })
@@ -217,7 +224,7 @@ function loadPizzaList() {
       }
       clone.map(pizzaID => {
         const pizzaDiv = document.createElement("div")
-        rootElement.appendChild(pizzaDiv)
+        container.appendChild(pizzaDiv)
         pizzaDiv.setAttribute("id", `${pizzaID.name}`)
         for (const [key, value] of Object.entries(pizzaID)) {
           if (key === "img") {
