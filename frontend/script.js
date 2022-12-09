@@ -88,7 +88,6 @@ const responseMessage = () => `
     </div>`
   ;
 
-
 rootElement.insertAdjacentHTML("afterbegin", formComponent());
 
 let checkName = "false";
@@ -137,7 +136,6 @@ document.getElementById('city').addEventListener('input', function (e) {
   }
 });
 
-
 document.getElementById('street').addEventListener('input', function (e) {
   let errMsg = document.getElementById('streetMessage');
   if (e.target.value === "") {
@@ -162,6 +160,7 @@ document.getElementById('submit').addEventListener('click', function (event) {
     rootElement.insertAdjacentHTML("beforeend", responseMessage());
   }
 });
+
 function loadAllergens() {
   fetch('/../api/allergens')
     .then((response) => {
@@ -171,7 +170,6 @@ function loadAllergens() {
             const allergen = document.createElement("div")
             rootElement.appendChild(allergen)
             allergen.setAttribute("id", "allergenContainer")
-            allergenFinder = data.allergens;
             for (const [key, value] of Object.entries(i)) {
               const div = document.createElement("div")
               div.setAttribute("id", "allergensData")
@@ -182,17 +180,45 @@ function loadAllergens() {
         })
     })
 };
+let allergenToFilter = 0;
 
 function loadPizzaList() {
+  const allergenFilterer = document.createElement("select")
+  allergenFilterer.setAttribute("id", "allergenFilterer");
+  rootElement.appendChild(allergenFilterer);
+  let opt = document.createElement("option");
+  opt.innerHTML = "Select an allergen to filter";
+  allergenFilterer.appendChild(opt);
+  fetch('/../api/allergens')
+    .then((response) => {
+      response.json()
+        .then((data) => {
+          for (let i of data.allergens) {
+            let opt = document.createElement("option");
+            opt.value = i.id;
+            opt.innerHTML = i.name;
+            allergenFilterer.appendChild(opt);
+          }
+          allergenFilterer.addEventListener('change', (e) => {
+            allergenToFilter = e.target.value;
+            rootElement.innerHTML = "";
+            loadPizzaList()
+          }
+          )
+        })
+    })
+
   fetch('/../api/pizza').then((response) => {
     response.json().then((data) => {
-      data.map(pizzaID => {
-
+      let clone = JSON.parse(JSON.stringify(data));
+      if (allergenToFilter !== 0) {
+        clone = [];
+        data = data.map(i => !i.allergens.includes(+allergenToFilter) ? clone.push(i) : i)
+      }
+      clone.map(pizzaID => {
         const pizzaDiv = document.createElement("div")
         rootElement.appendChild(pizzaDiv)
-
         pizzaDiv.setAttribute("id", `${pizzaID.name}`)
-
         for (const [key, value] of Object.entries(pizzaID)) {
           if (key === "img") {
             const img = document.createElement("img")
@@ -200,10 +226,10 @@ function loadPizzaList() {
             img.setAttribute("id", `${key}`)
             img.setAttribute("src", `${value}`)
           } else if (key === "allergens") {
-            const div = document.createElement("div")
-            pizzaDiv.appendChild(div)
-            div.setAttribute("id", `${key}`)
-            div.innerHTML += `allergens: `
+            const div = document.createElement("div");
+            pizzaDiv.appendChild(div);
+            div.setAttribute("id", `${key}`);
+            div.innerHTML += `allergens: `;
             fetch('/../api/allergens')
               .then((response) => {
                 response.json()
@@ -315,7 +341,6 @@ function loadPizzaList() {
               checkIfDelete()
             })
           }
-
         })
       })
     })
@@ -351,4 +376,3 @@ function orderPost() {
     })
     .catch(err => console.log(err));
 }
-
